@@ -7,13 +7,20 @@ use Illuminate\Support\Facades\DB;
 
 class ViewController extends Controller
 {
-    public function viewpost(){
-        $data = DB::select("SELECT * FROM barang");
-
-        return view('view')->with('data', $data);
+    public function viewpost()
+    {
+        $data = [
+            'title' => 'View Posts',
+            'query' => DB::select("SELECT * FROM barang")
+        ];
+        return view('view', $data);
     }
 
-    public function about(){
-        return view('about');
+    public function about()
+    {
+        $data = [
+            'title' => 'About'
+        ];
+        return view('about', $data);
     }
 }
