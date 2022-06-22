@@ -27,7 +27,7 @@
                         Ini berfokus pada penjualan perangkat elektronik, terutama komputer atau laptop. Website ini
                         diciptakan untuk memperluas pasar penjualan di bidang digital.
                     </p>
-                    <a class="btn btn-primary btn-xl" href="/auth">Get Started!</a>
+                    <a class="btn btn-primary btn-xl" href="/login">Get Started!</a>
                 </div>
             </div>
         </div>

@@ -11791,6 +11791,10 @@ hr.divider-light {
     }
 }
 
+body {
+    font-family: "Poppins", sans-serif !important;
+}
+
 header.home {
     padding-top: 10rem;
     padding-bottom: calc(10rem - 4.5rem);
@@ -11808,6 +11812,13 @@ header.home {
 header.home h1,
 header.home .h1 {
     font-size: 2.25rem;
+}
+.gradient-custom {
+    background: linear-gradient(
+        to right,
+        rgba(244, 98, 58, 1),
+        rgba(235, 136, 18, 1)
+    );
 }
 @media (min-width: 992px) {
     header.home {
