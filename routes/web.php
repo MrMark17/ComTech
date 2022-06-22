@@ -1,7 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\ViewController;
+use App\Http\Controllers\Landing;
+use App\Http\Controllers\Auth;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,10 +15,7 @@ use App\Http\Controllers\ViewController;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
-
-Route::get('/viewposts', [ViewController::class,'viewpost']);
-
-Route::get('/abouts', [ViewController::class,'about']);
+Route::get('/', [Landing::class, 'index']);
+Route::get('/login', [Auth::class, 'index']);
+Route::get('/register', [Auth::class, 'register']);
+Route::post('/actionLogin', [Auth::class, 'actionLogin']);
