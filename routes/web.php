@@ -18,3 +18,4 @@ use App\Http\Controllers\Auth;
 Route::get('/', [Landing::class, 'index']);
 Route::get('/login', [Auth::class, 'index']);
 Route::get('/register', [Auth::class, 'register']);
+Route::post('/actionLogin', [Auth::class, 'actionLogin']);

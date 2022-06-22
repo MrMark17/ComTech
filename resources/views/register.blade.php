@@ -26,18 +26,18 @@
                                             </div>
                                             <div class="col-12">
                                                 <label for="inputChoosePassword" class="form-label">Alamat</label>
-                                                <input type="text" name="password" class="form-control border-end-0 "
+                                                <input type="text" name="password" class="form-control"
                                                     id="inputChoosePassword" placeholder="Alamat">
                                             </div>
                                             <div class="col-12">
                                                 <label for="inputChoosePassword" class="form-label">Password</label>
-                                                <input type="password" name="password1" class="form-control border-end-0 "
-                                                    id="password1" placeholder="Enter Password">
+                                                <input type="password" name="password1" class="form-control" id="password1"
+                                                    placeholder="Enter Password">
                                             </div>
                                             <div class="col-12">
                                                 <label for="inputChoosePassword" class="form-label">Confirm Password</label>
-                                                <input type="password" name="password2" class="form-control border-end-0 "
-                                                    id="pasasword2" placeholder="Confirm Password">
+                                                <input type="password" name="password2" class="form-control" id="pasasword2"
+                                                    placeholder="Confirm Password">
                                             </div>
                                             <div class="col-12">
                                                 <div class="d-grid">
