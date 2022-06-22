@@ -2,18 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Cookie\CookieJar;
-use Cookie;
+use Illuminate\Http\Request;
+use App\Models\Login;
+use Illuminate\Support\Facades\Session;
 
 class Auth extends Controller
 {
-    protected $cookieJar;
-
-    public function __construct(CookieJar $cookieJar)
-    {
-        $this->cookieJar = $cookieJar;
-    }
-
     public function index()
     {
         $data = [
@@ -28,22 +22,54 @@ class Auth extends Controller
         ];
         return view('register', $data);
     }
-    public function actionLogin()
+    public function actionLogin(Request $request)
     {
-        $data = [
-            'email' => $this->request->getPost('email'),
-            'password' => $this->request->getPost('password')
-        ];
-        $user = $this->model->where('email', $data['email'])->first();
-        if ($user) {
-            if ($user->password == $data['password']) {
-                $this->session->set('user', $user);
-                return redirect()->to('/dashboard');
+        $valid = $this->validate($request, [
+            'email' => 'required|email',
+            'password' => 'required'
+        ]);
+
+        if ($valid) {
+            $email = $request->input('email');
+            $password = $request->input('password');
+            $user = Login::where('email', $email)->first();
+            if ($user) {
+                if ($user->password == $password) {
+                    Session::put('user', $user);
+                    return redirect()->to('/login')->with('success', 'Welcome back, ' . $user->nama . '');
+                } else {
+                    return redirect('/login')->with('error', 'Password is incorrect');
+                }
             } else {
-                return redirect()->to('/login')->with('error', 'Password salah');
+                return redirect('/login')->with('error', 'Email is not registered');
             }
         } else {
-            return redirect()->to('/login')->with('error', 'Email tidak ditemukan');
+            return redirect('/login', $valid);
+        }
+    }
+    public function actionRegister(Request $request)
+    {
+        $valid = $this->validate($request, [
+            'nama' => 'required',
+            'email' => 'required|email',
+            'alamat' => 'required',
+            'password' => 'required|confirmed|min:6'
+        ]);
+        if ($valid) {
+            $nama = $request->input('nama');
+            $email = $request->input('email');
+            $alamat = $request->input('alamat');
+            $password = $request->input('password');
+
+            $user = new Login();
+            $user->nama = $nama;
+            $user->alamat = $alamat;
+            $user->email = $email;
+            $user->password = $password;
+            $user->save();
+            return redirect('/login')->with('registered', 'Register success, Now you can Sign in');
+        } else {
+            return redirect('/register', $valid);
         }
     }
 }

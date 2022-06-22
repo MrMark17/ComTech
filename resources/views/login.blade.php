@@ -11,15 +11,42 @@
                                     <div class="text-center">
                                         <img src="assets/img/logo.png" width="50" class="mb-3" />
                                         <h3 class="">Sign in</h3>
-                                        @if ($errors->any())
-                                            <h4>{{ $errors->first() }}</h4>
-                                        @endif
                                     </div>
+                                    @if ($message = Session::get('error'))
+                                        <div class="alert alert-danger">
+                                            <small>{{ $message }}</small>
+                                        </div>
+                                    @endif
+                                    @if ($message = Session::get('success'))
+                                        <div class="alert alert-success">
+                                            <small>{{ $message }}</small>
+                                        </div>
+                                        <script>
+                                            setTimeout(function() {
+                                                window.location.href = "/"
+                                            }, 2000);
+                                        </script>
+                                    @endif
+                                    @if ($message = Session::get('registered'))
+                                        <div class="alert alert-success">
+                                            <small>{{ $message }}</small>
+                                        </div>
+                                    @endif
+                                    @if (count($errors) > 0)
+                                        <div class="alert alert-danger my-auto">
+                                            <ul class="my-auto">
+                                                @foreach ($errors->all() as $error)
+                                                    <li>{{ $error }}</li>
+                                                @endforeach
+                                            </ul>
+                                        </div>
+                                    @endif
                                     <div class="form-body">
                                         <form class="row g-3" action="/actionLogin" method="post">
+                                            @csrf
                                             <div class="col-12">
                                                 <label for="inputEmailAddress" class="form-label">Email Address</label>
-                                                <input type="email" class="form-control " name="email"
+                                                <input type="text" class="form-control " name="email"
                                                     placeholder="Email Address">
                                             </div>
                                             <div class="col-12">
@@ -37,8 +64,6 @@
                                             </div>
                                             <p>Don't have an account? <a href="/register">Sign up here</a>
                                             </p>
-                                            {{ method_field('POST') }}
-                                            {{ csrf_field() }}
                                         </form>
 
                                     </div>
